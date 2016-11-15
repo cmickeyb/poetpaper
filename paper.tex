@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{lipsum}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+
+
+\title{PoET: A Power Efficient, Scalable Consensus Algorithm }
+\author{Mic Bowman \\ \url{mic.bowman@intel.com}}
+\date{2016-Jun-15}
+\begin{document}
+\maketitle
+%\tableofcontents
+%\newpage
+
+\input{introduction.tex}
+% goal open population of validators
+% threat model
+
+\input{priorart.tex}
+
+\input{poet.tex}
+% basic poet algorithm indenpdent of the enclave
+% initialization/slow start
+% flow control: create timer, when timer expires, create cert, verify cert
+% configuration parameters
+% population dynamics with computation of local mean
+% handling forks, single block selection, multiple block
+% chains... largest aggregate local mean, rationale for why this works
+% evaluation of local mean adaptation
+
+\input{enclave.tex}
+% high level description of the enclave interface
+% signup phase, create wt, create wc, verify wc
+% enclave evaluation... various attacks and the solutions
+
+% Naive approach to validation results in horrible performance. Added
+% signup phase to offload validation, implications for revocation
+
+% dependence on ME for time; the threat for attacks. Not really a
+% problem since the tie breaker ensures correctness and progress. But
+% important for DOS prevention
+
+% wait cert bound to a block --> blockhash, why we can do late binding
+% by adding allowing one wait cert per wait timer (only get one chance,
+% can't game wait cert creation by trying different blockhashes)
+% wait cert bound to a validator --> validator public id in the blockhash
+% multiple instances of an enclave --> monotonic counter in the signup info
+% multiple signup attack --> validation policy requires N blocks before
+% registration complete
+% recourse: revocation....
+
+Multiple instances of the enclave
+Problem: Multiple instances of an enclave implies multiple votes
+Solution: Bind the ID of a monotonic counter to the EPID pseudonym
+during sign up 
+
+Restarting the enclave repeatedly to get a better identity
+Problem: Signature of the WC is used in the wait time computation
+implies PSK/PPK pair can influence the wait time point of control 
+Solution: Ledger implements policy to force multiple blocks to commit
+before an identity ledger randomness prevents meaningful control
+
+Late binding of transactions improves performance, but provides control point
+Problem: Block hash is used in wait time computation implies TXN list can influence future wait time
+Solution: At most one WC may be created for a WT
+
+Wait Certificate can be lifted and placed in a different block
+Problem: Separation of ledger and enclave identities allows WC to be lifted from the block
+Solution: Bind WC to persistent ledger identity, not just enclave identity
+
+\input{failure.tex}
+% when enclave fails...
+% failure models -- overclocked timer, compromised enclave
+% basic approach: preserve liveness and correctness, sacrifice performance
+% enclave identifier must be unique and persistent --> EPID pseudonym
+% (in signup info)
+% z test solution
+% z test during initialization
+% evaluation of z test solution
+% open issues, can we get into ``deadlock''... small populations could
+% be a problem but small populations are generally well known so
+% confidence interval can be very generous
+
+\input{evaluation.tex}
+% experimental evaluation
+% did it work... number of forks, resolution of forks
+% local mean adaptation
+% performance impact of compromised enclaves and overclocked timers
+
+\input{summary.tex}
+
+\begin{thebibliography}{9}
+\end{thebibliography}
+\end{document}

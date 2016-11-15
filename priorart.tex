@@ -1,0 +1,61 @@
+%% -*- fill-column: 120; -*-
+\section{Distributed Consensus}
+\label{sec_priorart}
+
+% -----------------------------------------------------------------
+% -----------------------------------------------------------------
+\subsection{Byzantine Fault Tolerance}
+
+Describe Byzantine Generals problem.
+
+Describe PBFT family of algorithms
+
+The Good:
+\begin{itemize}
+\item Performant
+\item Finality
+\end{itemize}
+
+The Challenges:
+\begin{itemize}
+\item Lots of communication
+\item Sensitive to network conditions
+\item Identity of all participants must be known
+\end{itemize}
+
+Limited decentralization.
+
+% -----------------------------------------------------------------
+% -----------------------------------------------------------------
+\subsection{Nakamoto Consensus}
+
+Describe Nakamoto Consensus as implemented in Bitcoin.
+
+Replace finality with eventual consistency (probabalistic)
+
+Proof of work as leader election and sybil prevention.
+
+Implicit voting.
+
+The Good:
+\begin{itemize}
+\item Decentralization of authority and implementation
+\end{itemize}
+
+The Challenges:
+\begin{itemize}
+\item Proof of work is extremely expensive
+\end{itemize}
+
+Properties of leader election in Nakamoto Consensus
+\begin{itemize}
+\item Uses distribution in time to optimize communication. A good leader
+  election algorithm distributes election over time to increase the
+  probability that only one broadcast is necessary.
+\item Resistant to censorship
+\item Adapts to population changes
+\end{itemize}
+
+% -----------------------------------------------------------------
+% -----------------------------------------------------------------
+\subsection{Trusted Execution}
