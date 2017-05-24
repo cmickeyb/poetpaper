@@ -1,0 +1,21 @@
+%% -*- fill-column: 120; -*-
+\section{Abstract}
+\label{sec_abstract}
+
+Consensus is the process of building agreement amongst a group of mutually distrusting participants. There are many
+different protocols for building consensus based on requirements related to performance, scalability, consistency,
+threat model, and failure model. Traditionally, protocols that achieve consensus for arbitrary (i.e. Byzantine) faults
+require several rounds of explicit voting. While this approach provides high throughput and finality of commits, its
+reliance on a well-known, generally static voting bloc and the heavy use of communication (multiple rounds of N^2
+messages) limit its use to reletively small, localized, and stable applications. Bitcoin introduced a new method for
+achieving consensus, called Nakamoto consensus, that supports broad participation from a very dynamic group of
+participants. Nakamoto consensus relies on uncoordinated, distributed leader election that is often very computationally
+intense. For example, Bitcoin uses ``proof of work'', a computation to solve a cryptographic puzzle through repetitive
+``guess and test''; a process that consumes gigawatts of power. 
+
+This paper describes a new leader election algorithm designed for Nakamoto style consensus, called ``Proof of Elapsed
+Time'' or PoET, that elects leaders through a simple computation in a trusted execution environment provided by
+commodity processors. PoET preserves the fairness and integrity of leader election provided by proof-of-work without
+high cost of electricity and custom hardware. This allows deployment of highly-resilient, fault tolerant applications
+for a dynamic community using commonly available computing resources. 
+

@@ -1,6 +1,34 @@
 %% -*- fill-column: 120; -*-
-\section{Circuit Breaker}
+% when enclave fails...
+% failure models -- overclocked timer, compromised enclave
+% basic approach: preserve liveness and correctness, sacrifice performance
+% enclave identifier must be unique and persistent --> EPID pseudonym
+% (in signup info)
+% z test solution
+% z test during initialization
+% evaluation of z test solution
+% open issues, can we get into ``deadlock''... small populations could
+% be a problem but small populations are generally well known so
+% confidence interval can be very generous
+
+\section{What Can Go Wrong?}
 \label{sec_failure}
+
+In a perfect world, SGX provides trusted execution of PoET. However, dependence on hardware exclusively seems like a
+very bad idea. 
+
+In this section we consider two failure models: an overclocked timer and a compromised enclave signing key. 
+
+\subsection{Timer Attack}
+
+PoET depends on the trusted timer provided by SGX platform services to ensure that enough time passes between the
+creation of the wait timer and the the wait certificate. One attack vector involves modifying the timer. 
+
+Waiting for the timer to expire is not necessary for correct operation. A timer that fires early will increase the
+number of forks. However, given that forks are resolved by the value of the duration, not the amount of time waited,
+then compromising the timer could result in a reduction in performance, but not compromised correctness.
+
+\subsection{Circuit Breaker}
 
 As you know, we cannot stop a validator with a compromised enclave from
 winning a validation round. A compromised enclave can create a bogus

@@ -110,17 +110,6 @@ Problem: Separation of ledger and enclave identities allows WC to be lifted from
 Solution: Bind WC to persistent ledger identity, not just enclave identity
 
 \input{failure.tex}
-% when enclave fails...
-% failure models -- overclocked timer, compromised enclave
-% basic approach: preserve liveness and correctness, sacrifice performance
-% enclave identifier must be unique and persistent --> EPID pseudonym
-% (in signup info)
-% z test solution
-% z test during initialization
-% evaluation of z test solution
-% open issues, can we get into ``deadlock''... small populations could
-% be a problem but small populations are generally well known so
-% confidence interval can be very generous
 
 \input{evaluation.tex}
 % experimental evaluation
