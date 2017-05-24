@@ -1,10 +1,11 @@
 %% -*- fill-column: 120; -*-
-\section{Distributed Consensus}
+\section{Prior Work}
 \label{sec_priorart}
 
 % -----------------------------------------------------------------
 % -----------------------------------------------------------------
-\subsection{Byzantine Fault Tolerance}
+\subsection{Distributed Consensus}
+\subsubsection{Byzantine Fault Tolerance}
 
 Describe Byzantine Generals problem.
 
@@ -27,7 +28,7 @@ Limited decentralization.
 
 % -----------------------------------------------------------------
 % -----------------------------------------------------------------
-\subsection{Nakamoto Consensus}
+\subsubsection{Nakamoto Consensus}
 
 Describe Nakamoto Consensus as implemented in Bitcoin.
 
@@ -59,3 +60,20 @@ Properties of leader election in Nakamoto Consensus
 % -----------------------------------------------------------------
 % -----------------------------------------------------------------
 \subsection{Trusted Execution}
+We love SGX.
+
+\begin{itemize}
+\item Confidentiality--Host cannot see what is executed in the enclave
+\item Integrity--The software has not been tampered with
+\item Attestation--Proof that we ran what we expected
+\end{itemize}
+
+The basic paradigm
+\begin{enumerate}
+\item Perform a computation that operates on some input and generates some output
+\item Prove to others that:
+\begin{itemize}
+\item The computation was performed by the agreed upon code
+\item For the given input the computation generated the given output
+\end{itemize}
+\end{enumerate}
