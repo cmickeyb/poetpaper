@@ -9,8 +9,8 @@ federated identity, clearing and settlement of financial transactions, multi-par
 of food, and privacy-preserving access to medical records. At the core of this revolution is a data structure called a
 {\it blockchain}. Simply put, a blockchain is a data structure that uses cryptographic hashes to create an immutable
 ordering of events. Communities use blockchains to represent a shared view of ``truth''. For example, when events like
-``transfer $50 from john to jane'' or ``grant tom access to file A'' are committed to a blockchain, the entire community
-agrees that the event occurred and can act accordingly.
+``transfer \$50 from john to jane'' or ``grant tom access to file A'' are committed to a blockchain, the entire
+community agrees that the event occurred and can act accordingly.
 
 There are many ways for a community to build and maintain a blockchain. In some cases, a trusted organization (like a
 representative consortium or a contracted infrastructure provider) can build a blockchain using fairly traditional
@@ -20,7 +20,7 @@ There are many different protocols for building consensus based on requirements 
 consistency, threat model, and failure model. Traditionally, protocols that achieve consensus for arbitrary
 (i.e. Byzantine) faults require several rounds of explicit voting. While this approach provides high throughput and
 finality of commits, its reliance on a well-known, generally static voting block and the heavy use of communication
-(multiple rounds of N^2 messages) limit its use to reletively small, localized, and stable applications. 
+(multiple rounds of $N^2$ messages) limit its use to reletively small, localized, and stable applications. 
 
 Bitcoin introduced a new method for achieving consensus, called Nakamoto consensus, that supports broad participation
 from a dynamic group of participants. Nakamoto consensus relies on uncoordinated, distributed leader election that is
